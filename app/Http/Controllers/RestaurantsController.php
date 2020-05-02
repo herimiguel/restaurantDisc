@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Restaruant;
+use App\Http\Requests\RestaurantRequest;
+use App\Restaurant;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-
-
 
 class RestaurantsController extends Controller
 {
@@ -35,29 +35,20 @@ class RestaurantsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\RestaurantRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RestaurantRequest $request)
     { 
-        $request -> validate([
-            'restaurantName' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'deal' => 'required',
-            'image' => 'required',
-        ]);
-        $restaurant = $request ->restaurants()->create([
-            'restaurantName' => $request->restaurantName,
-            'address' => $request ->address,
-            'phone' => $request ->phone,
-            'deal' => $request ->deal,
-            'image' => $request ->image,
-         ]);
-         return response([
-            'restaurant' => $restaurant,
-            'message' => 'Restaurant has been created'
-         ]);
+            $restaurant = new Restaurant();
+            $restaurant->restaurantName = request("restaurantName");
+            $restaurant->address = request("address");
+            $restaurant->phone = request("phone");
+            $restaurant->deal = request("deal");
+            $restaurant->image = request("image");
+            
+            $restaurant->save();
+
     }
 
     /**
