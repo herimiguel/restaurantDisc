@@ -16,7 +16,7 @@ class RestaurantsController extends Controller
      */
     public function index()
     {
-        $restaurants = \App\Restaurant::all();
+        $restaurants = Restaurant::all();
         return response() ->json([
             'restaurants' => $restaurants
         ], 200);
@@ -31,6 +31,13 @@ class RestaurantsController extends Controller
     {
         //
     }
+    public function profiles()
+    {
+        $restaurants = Restaurant::all();
+        return response() ->json([
+            'restaurants' => $restaurants
+        ], 200);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,6 +48,7 @@ class RestaurantsController extends Controller
     public function store(RestaurantRequest $request)
     { 
             $restaurant = new Restaurant();
+
             $restaurant->restaurantName = request("restaurantName");
             $restaurant->address = request("address");
             $restaurant->phone = request("phone");
@@ -48,6 +56,7 @@ class RestaurantsController extends Controller
             $restaurant->image = request("image");
             
             $restaurant->save();
+            return $request->image;
 
     }
 
@@ -76,27 +85,29 @@ class RestaurantsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+
+     * @param  \Illuminate\Http\Request $request
+     
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $request -> validate([
-            'restaurantName' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'deal' => 'required',
-            'image' => 'required',
-        ]);
+        $restaurant = Restaurant::findOrFail($id);
+            $currentPhoto = $restaurant->image;
+            $name = time().'.' . explode('/', explode(':', substr($request->image, 0, strpos($request->image, ';')))[1])[1];
+            \Image::make($request->image)->save(public_path('img/profile/').$name);
+            $request->merge(['image' => $name]);
+            $userPhoto = public_path('img/profile/').$currentPhoto;
 
-        $restaurant = $request->restaurants()->whereId($id)->update($request->all());
+        $restaurant->update($request->all());
         return response([
-            'restaurant' => $restaurant,
-            'message' => 'Restaurant has been updated'
+            'restaurant' => $restaurant, 
+            'message' => 'items has been created'
         ]);
+    
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
