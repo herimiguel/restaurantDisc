@@ -1,123 +1,137 @@
 <style >
 
-.widget-user-header{
+/* .widget-user-header{
     background-position: center center;
     background-size: cover;
     height: 250px !important;
-}
+} */
 .widget-user .card-footer{
     padding: 0;
+}
+.restImage{
+    padding-bottom: 30px;
+    padding-top: 20px;
+    padding-left: 40px;
+}
+
+.header{
+    background-color: black;
+}
+
+.imagebody{
+    background-color: black;
+}
+.RestaurantName{
+    color: white;
+
+    
+}
+.td{
+    color: white;
 }
 
 </style>
 <template>
-    <div>
+<div class="container">
+    <div class="col-md-12">
+        <thead class=" header col-md-6">
+            <!-- <tr class="col-md-5">
+                <th class=" col-md-3" ></th>
+                <th>Addressssssssssssdssddddddddss</th>
+                <th>Phone</th>
+                <!-- <th>Deal</th> -->
+                <!-- <th>Image</th>
+            </tr> -->
+        </thead>
+        <tbody class="imagebody col-md-6"v-if= "allRestaurants" >
+            <tr class="contentBody col-md-5"v-for="(restaurant, index) in restaurants">
+                <td class="restImage col-sm-2"  ><img :src="`/img/profile/`+ restaurant.image" alt="Profile Picture" height="300px" width="300px"><h1 class="RestaurantName">{{ restaurant.restaurantName }}</h1>
+                <h3 class="td">{{ restaurant.address }} </h3>
+                <h3 class="td">{{ restaurant.phone }}</h3>
+                <h3 class="td " width="300px" >{{ restaurant.deal }}</h3>
+                </td>
+               
 
-        <div class="table">
-            <thead>
-                <tr>
-                    <th>Restaurant Name</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>Deal</th>
-                    <th>Image</th>
-
-                </tr>
-            </thead>
-            <tbody v-if= "allRestaurants" >
-                <tr v-for="(restaurant, index) in restaurants">
-                    <td>{{ restaurant.restaurantName }}</td>
-                    <td>{{ restaurant.address }}</td>
-                    <td>{{ restaurant.phone }}</td>
-                    <td>{{ restaurant.deal }}</td>
-                    <img class="circle" :src="`/img/profile/`+ restaurant.image" alt="Profile Picture" >
-                    <td><button @click="showUpdateModal(index)" class="btn btn-info">Edit </button></td>
-                    <td><button @click="deleteRestaurant(index)" class="btn btn-danger">Delete  </button></td>
-
-                </tr>
-            </tbody>
-        </div>
-
+                <td  ><button @click="showUpdateModal(index)" class="btn btn-info">Edit </button></td>
+                <td ><button @click="deleteRestaurant(index)" class="btn btn-danger">Delete  </button></td>
+            </tr>
+        </tbody>
+    </div>
         <!-- create modal -->
-<button @click="showCreateModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#s">Add a Restaurant</button>
+    <button @click="showCreateModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#s">Add a Restaurant</button>
 
 <!-- Create Modal -->
- <div class="modal fade" id="addRestaurantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" >Add Restaurant</h5>
-      
-      </div>
-      <div class="modal-body">
-            <div class="form-group" >
-                <label for="restaurantName" >Restaurant Name </label>
-                <input v-model="rest.restaurantName" type="text"  class="from-control" >
-            </div> 
-            <div class="form-group" >
-                <label for="address" >Adress </label>
-                <input v-model="rest.address" type="text" id="address" class="from-control" >
-            </div>
-             <div class="form-group" >
-                <label for="phone" >Phone </label>
-                <input v-model="rest.phone" type="text" id="phone" class="from-control" >
-            </div> 
-            <div class="form-group" >
-                <label for="deal" >Deal </label>
-                <input v-model="rest.deal" type="text" id="deal" class="from-control" >
-            </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button @click="createRestaurant" type="button" class="btn btn-primary">Add to Restaurant List</button>
-      </div>
-    </div>
-  </div>
-</div> 
-<!-- update Modal -->
- <div class="modal fade" id="updateRestaurantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" >Update Restaurant</h5>
-      
-      </div>
-      <div class="modal-body">
-            <div class="form-group" >
-                <label for="restaurantName" >Restaurant Name </label>
-                <input v-model="updateRestaurant.restaurantName" type="text"  class="from-control" >
-            </div> 
-            <div class="form-group" >
-                <label for="address" >Adress </label>
-                <input v-model="updateRestaurant.address" type="text" id="address" class="from-control" >
-            </div>
-             <div class="form-group" >
-                <label for="phone" >Phone </label>
-                <input v-model="updateRestaurant.phone" type="text" id="phone" class="from-control" >
-            </div> 
-            <div class="form-group" >
-                <label for="deal" >Deal </label>
-                <input v-model="updateRestaurant.deal" type="text" id="deal" class="from-control" >
-            </div>
-             <div class="box">
-               
-                <label for="image" class="col-sm-2 control-label">Image</label>
-                <div class="col-sm-12">
-                    <input type="file" @change="updateProfile" name="image" class="form-input">
+    <div class="modal fade" id="addRestaurantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Add Restaurant</h5>
                 </div>
-            </div> 
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button @click="editRestaurant" type="button" class="btn btn-primary">Update Restaurant List</button>
-      </div>
-    </div>
-  </div>
-</div> 
-        
-    </div>
+                <div class="modal-body">
+                    <div class="form-group" >
+                        <label for="restaurantName" >Restaurant Name </label>
+                        <input v-model="rest.restaurantName" type="text"  class="from-control" >
+                    </div> 
+                    <div class="form-group" >
+                        <label for="address" >Adress </label>
+                        <input v-model="rest.address" type="text" id="address" class="from-control" >
+                    </div>
+                    <div class="form-group" >
+                        <label for="phone" >Phone </label>
+                        <input v-model="rest.phone" type="text" id="phone" class="from-control" >
+                    </div> 
+                    <div class="form-group" >
+                        <label for="deal" >Deal </label>
+                        <input v-model="rest.deal" type="text" id="deal" class="from-control" >
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button @click="createRestaurant" type="button" class="btn btn-primary">Add to Restaurant List</button>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+<!-- update Modal -->
+    <div class="modal fade" id="updateRestaurantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Update Restaurant</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" >
+                        <label for="restaurantName" >Restaurant Name </label>
+                        <input v-model="updateRestaurant.restaurantName" type="text"  class="from-control" >
+                    </div> 
+                    <div class="form-group" >
+                        <label for="address" >Adress </label>
+                        <input v-model="updateRestaurant.address" type="text" id="address" class="from-control" >
+                    </div>
+                    <div class="form-group" >
+                        <label for="phone" >Phone </label>
+                        <input v-model="updateRestaurant.phone" type="text" id="phone" class="from-control" >
+                    </div> 
+                    <div class="form-group" >
+                        <label for="deal" >Deal </label>
+                        <input v-model="updateRestaurant.deal" type="text" id="deal" class="from-control" >
+                    </div>
+                    <div class="box">
+                        <div class="col-sm-12">
+                            <label for="image" class="col-sm-2 control-label">Image</label>
+                            <input type="file" @change="updateProfile" name="image" class="form-input">
+                        </div>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button @click="editRestaurant" type="button" class="btn btn-primary">Update Restaurant List</button>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
 </template>
 
 <script>
@@ -163,10 +177,8 @@
                     image: this.updateRestaurant.image
                 })
                 .then(response => {
-                $("#updateRestaurantModal").modal("hide");
+                    $("#updateRestaurantModal").modal("hide");
                     this.loadRestaurants();
-
-
                 })
                 .catch(error=>{
                     if(error.response.data.errors.name){
@@ -183,8 +195,7 @@
                     console.log(" created ..."+response.data);
                     this.restaurants.push(response.data);
                 $("#addRestaurantModal").modal("hide");
-                this.loadRestaurants();
-
+                    this.loadRestaurants();
                 })
                 .catch(error=>{
                      this.errors = [];
@@ -215,10 +226,8 @@
 
              updateProfile(e) {
             let file = e.target.files[0];
-
             let reader = new FileReader();
             if(file['size'] < 2111775){
-
             reader.onloadend = (file) =>{
               this.updateRestaurant.image = reader.result;
             }

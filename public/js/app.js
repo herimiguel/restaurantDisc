@@ -2063,6 +2063,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6735,7 +6749,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.widget-user-header{\n    background-position: center center;\n    background-size: cover;\n    height: 250px !important;\n}\n.widget-user .card-footer{\n    padding: 0;\n}\n\n", ""]);
+exports.push([module.i, "\n\n/* .widget-user-header{\n    background-position: center center;\n    background-size: cover;\n    height: 250px !important;\n} */\n.widget-user .card-footer{\n    padding: 0;\n}\n.restImage{\n    padding-bottom: 30px;\n    padding-top: 20px;\n    padding-left: 40px;\n}\n.header{\n    background-color: black;\n}\n.imagebody{\n    background-color: black;\n}\n.RestaurantName{\n    color: white;\n}\n.td{\n    color: white;\n}\n\n", ""]);
 
 // exports
 
@@ -38528,30 +38542,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "table" }, [
-      _vm._m(0),
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "col-md-12" }, [
+      _c("thead", { staticClass: " header col-md-6" }),
       _vm._v(" "),
       _vm.allRestaurants
         ? _c(
             "tbody",
+            { staticClass: "imagebody col-md-6" },
             _vm._l(_vm.restaurants, function(restaurant, index) {
-              return _c("tr", [
-                _c("td", [_vm._v(_vm._s(restaurant.restaurantName))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(restaurant.address))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(restaurant.phone))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(restaurant.deal))]),
-                _vm._v(" "),
-                _c("img", {
-                  staticClass: "circle",
-                  attrs: {
-                    src: "/img/profile/" + restaurant.image,
-                    alt: "Profile Picture"
-                  }
-                }),
+              return _c("tr", { staticClass: "contentBody col-md-5" }, [
+                _c("td", { staticClass: "restImage col-sm-2" }, [
+                  _c("img", {
+                    attrs: {
+                      src: "/img/profile/" + restaurant.image,
+                      alt: "Profile Picture",
+                      height: "300px",
+                      width: "300px"
+                    }
+                  }),
+                  _c("h1", { staticClass: "RestaurantName" }, [
+                    _vm._v(_vm._s(restaurant.restaurantName))
+                  ]),
+                  _vm._v(" "),
+                  _c("h3", { staticClass: "td" }, [
+                    _vm._v(_vm._s(restaurant.address) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("h3", { staticClass: "td" }, [
+                    _vm._v(_vm._s(restaurant.phone))
+                  ]),
+                  _vm._v(" "),
+                  _c("h3", { staticClass: "td ", attrs: { width: "300px" } }, [
+                    _vm._v(_vm._s(restaurant.deal))
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -38617,7 +38642,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -38777,7 +38802,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -38905,16 +38930,16 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "box" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-sm-2 control-label",
-                      attrs: { for: "image" }
-                    },
-                    [_vm._v("Image")]
-                  ),
-                  _vm._v(" "),
                   _c("div", { staticClass: "col-sm-12" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-2 control-label",
+                        attrs: { for: "image" }
+                      },
+                      [_vm._v("Image")]
+                    ),
+                    _vm._v(" "),
                     _c("input", {
                       staticClass: "form-input",
                       attrs: { type: "file", name: "image" },
@@ -38952,24 +38977,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Restaurant Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Address")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Phone")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Deal")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Image")])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
