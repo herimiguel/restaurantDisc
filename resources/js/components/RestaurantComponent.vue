@@ -35,13 +35,7 @@
 <div class="container">
     <div class="col-md-12">
         <thead class=" header col-md-6">
-            <!-- <tr class="col-md-5">
-                <th class=" col-md-3" ></th>
-                <th>Addressssssssssssdssddddddddss</th>
-                <th>Phone</th>
-                <!-- <th>Deal</th> -->
-                <!-- <th>Image</th>
-            </tr> -->
+
         </thead>
         <tbody class="imagebody col-md-6"v-if= "allRestaurants" >
             <tr class="contentBody col-md-5"v-for="(restaurant, index) in restaurants">
